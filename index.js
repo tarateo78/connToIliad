@@ -72,11 +72,11 @@ http.createServer( (req, res) => {
 			console.log ( giorniOfferta );
 
 			res.write("Consumi:\n");
-			res.write( consumo + "\n" );
-			res.write( credito + "\n" );
-			res.write( endOfferta + "\n" );
-			res.write( giorniPassati + "\n" );
-			res.write( giorniOfferta + "\n" );
+			res.write( "Dati: " + consumo + "\n" );
+			res.write( "Credito: " + credito + "\n" );
+			res.write( "Fine: " + endOfferta + "\n" );
+			res.write( "GG tras: " + giorniPassati + "\n" );
+			res.write( "GG mese: " + giorniOfferta + "\n" );
 			res.end();
 
 		});
