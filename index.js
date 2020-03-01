@@ -2,10 +2,13 @@ const http = require('http');
 
 
 
-const PORT = process.env.PORT || 3000;
+const PORT =  process.env.PORT || 3000;
 
-http.createServer( function( req, res ) {
-	res.write("eccolo!");
-	console.log( 'ecco' );
-	console.log( PORT );
+http.createServer( (req, res) => {
+	if( req.url === '/' ) {
+		res.write("eccolo!");
+		res.end();
+		console.log( 'ecco' );
+		console.log( PORT );
+	}
 }).listen(PORT);
