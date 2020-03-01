@@ -25,19 +25,28 @@ http.createServer( (req, res) => {
 		}
 	};
 
-	var creditoTmp;
+
+	var consumo;
+	var credito;
+	var endOfferta;
+	var giorniPassati;
+	var giorniOfferta;
+
 
 	request.post( areariservata, function(error, response, body) {
-		console.log(body);
+		//console.log(body);
 		const $ = cheerio.load( body );
 
 		//-- Set Credito Residuo
-		creditoTmp = $('h2 > b').html();
+		var creditoTmp = $('h2 > b').html();
 		creditoTmp = creditoTmp.split("&");
-		var credito = creditoTmp[0];
+		credito = creditoTmp[0];
+
+		//-- Set consumo
+		consumo = $('.conso__text > .red').text();
 
 		//-- Set giorni offerta
-		var endOfferta = $('.end_offerta').text().substring(59,69);
+		endOfferta = $('.end_offerta').text().substring(59,69);
 		var miaData = endOfferta.split("/");
 		var dE = new Date( miaData[2] + "/" + miaData[1] + "/" + miaData[0] );
 		// console.log(dE.toLocaleDateString());
@@ -54,11 +63,12 @@ http.createServer( (req, res) => {
 
 		var oggi = new Date();
 		var diffInTime = oggi.getTime() - dI.getTime(); 
-		var giorniPassati = Math.trunc( diffInTime / (1000 * 3600 * 24) ); 
+		giorniPassati = Math.trunc( diffInTime / (1000 * 3600 * 24) ); 
 		
+		console.log( consumo );
 		console.log( credito );
 		console.log( endOfferta );
-		console.log(giorniPassati);
+		console.log( giorniPassati);
 		console.log ( giorniOfferta );
 
 
@@ -78,10 +88,12 @@ http.createServer( (req, res) => {
 
 	// a qui
 		res.write("eccolo!");
+		res.write( consumo + "/n" );
+		res.write( credito + "/n" );
+		res.write( endOfferta + "/n" );
+		res.write( giorniPassati + "/n" );
+		res.write( giorniOfferta + "/n" );
 		res.end();
-		console.log( 'ecco' );
-		console.log( PORT );
-		console.log( ident, pwd );
 	}
 }).listen(PORT);
 
