@@ -1,5 +1,6 @@
 const http = require('http');
 const request = require( 'request' );
+const cheerio = require( 'cheerio' );
 
 const PORT =  process.env.PORT || 3000;
 
@@ -28,7 +29,7 @@ http.createServer( (req, res) => {
 
 	request.post( areariservata, function(error, response, body) {
 		console.log(body);
-		/*const $ = cheerio.load( body );
+		const $ = cheerio.load( body );
 
 		//-- Set Credito Residuo
 		creditoTmp = $('h2 > b').html();
@@ -58,7 +59,7 @@ http.createServer( (req, res) => {
 		console.log( credito );
 		console.log( endOfferta );
 		console.log(giorniPassati);
-		console.log ( giorniOfferta );*/
+		console.log ( giorniOfferta );
 
 
 	});
