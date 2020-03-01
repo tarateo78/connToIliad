@@ -1,2 +1,2 @@
 Worker: node index.js
-web: $PORT
+web: bundle exec rails server -p $PORT
