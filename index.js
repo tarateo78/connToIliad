@@ -43,7 +43,10 @@ http.createServer( (req, res) => {
 		credito = creditoTmp[0];
 
 		//-- Set consumo
-		consumo = $('.conso__text > .red').text();
+		$('.conso__text > .red').each(function(i,item){
+			if (i==4) consumo =   $(item).text().split("G")[0] ;
+		});
+
 
 		//-- Set giorni offerta
 		endOfferta = $('.end_offerta').text().substring(59,69);
